@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bluetooth Instant Printer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container-fluid">
+
+      <div class="row"> <!-- Title -->
+        <div class="col">
+          <h1>Bluetooth Instant Printer <small>Ip : <span id="ip">{{ data.ip }}</span></small></h1>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <form class="" action="/sendPicture" method="post">
+          <input type="file" name="" value="">
+        </form>
+      </div>
+
+    </div> <!-- /container-fluid -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="../static/js/script.js" charset="utf-8"></script>
+    <script src="{{url_for('static', filename='js/script.js')}}" charset="utf-8"></script>
+  </body>
+</html>
