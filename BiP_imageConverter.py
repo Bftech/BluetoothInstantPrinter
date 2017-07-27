@@ -1,43 +1,21 @@
 # convert 01.jpg -rotate 90 -resize 384 -dither FloydSteinberg -remap pattern:gray50 01F.png
-import time  
+import time
 import subprocess
-from watchdog.observers import Observer
-from watchdog.events import PatternMatchingEventHandler
+import pyinotify
 #INIT
 
-class ConversionObserver(PatternMatchingEventHandler):
-    patterns = ["*.png", "*.jpg"]
+# The watch manager stores the watches and provides operations on watches
+wm = pyinotify.WatchManager()
 
-    def process(self, event):
-        """
-        event.event_type
-            'modified' | 'created' | 'moved' | 'deleted'
-        event.is_directory
-            True | False
-        event.src_path
-            path/to/observed/file
-        """
-        # the file will be processed there
-        print event.src_path, event.event_type  # print now only for degug
+mask = pyinotify.IN_CLOSE_WRITE  # watched events
 
-    def on_created(self, event):
-        self.process(event)
+class EventHandler(pyinotify.ProcessEvent):
+    def process_IN_CLOSE_WRITE(self, event):
+        print "Uploaded:", event.pathname
 
 
-#RUN
-if __name__ == '__main__':
-    print "Start"
+handler = EventHandler()
+notifier = pyinotify.Notifier(wm, handler)
 
-    convObserver = Observer()
-    convObserver.schedule(ConversionObserver(), path="/home/pi/bluetoothUpload")
-    convObserver.start()
-
-    try:
-        while True:
-            time.sleep(1)
-    except KeyboardInterrupt:
-        convObserver.stop()
-
-    convObserver.join()
-
-    print "Stop"
+wdd = wm.add_watch('/home/pi/bluetoothUpload', mask, rec=True)
+notifier.loop()
