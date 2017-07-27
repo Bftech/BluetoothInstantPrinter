@@ -1,5 +1,5 @@
 # convert 01.jpg -rotate 90 -resize 384 -dither FloydSteinberg -remap pattern:gray50 01F.png
-
+import time  
 import subprocess
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
@@ -26,6 +26,8 @@ class ConversionObserver(PatternMatchingEventHandler):
 
 #RUN
 if __name__ == '__main__':
+    print "Start"
+
     convObserver = Observer()
     convObserver.schedule(ConversionObserver(), path="/home/pi/bluetoothUpload")
     convObserver.start()
@@ -37,3 +39,5 @@ if __name__ == '__main__':
         convObserver.stop()
 
     convObserver.join()
+
+    print "Stop"
