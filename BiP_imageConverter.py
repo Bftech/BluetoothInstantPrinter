@@ -23,8 +23,9 @@ class EventHandler(pyinotify.ProcessEvent):
         if event.pathname.endswith(".png") or event.pathname.endswith(".jpg") or event.pathname.endswith(".PNG") or event.pathname.endswith(".JPG"):
             #convert
             print "Uploaded:", event.pathname
-            subprocess.Popen(['convert', event.pathname, '-rotate', '90', '-resize', '384', '-dither', 'FloydSteinberg', '-remap', 'pattern:gray50', event.pathname + "_FloydSteinberg-converted.png"])
-            
+            print "Converting..."
+            subprocess.call(['convert', event.pathname, '-rotate', '90', '-resize', '384', '-dither', 'FloydSteinberg', '-remap', 'pattern:gray50', event.pathname + "_FloydSteinberg-converted.png"])
+            print "Converted !"
 
         if event.name == "shutdown.txt":
             print "shutdown"
