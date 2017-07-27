@@ -3,6 +3,7 @@ import time
 import os
 import subprocess
 import pyinotify
+from PIL import Image
 from Adafruit_Thermal import *
 
 #INIT
