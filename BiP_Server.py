@@ -19,7 +19,7 @@ class EventHandler(pyinotify.ProcessEvent):
         if event.pathname.endswith("_FloydSteinberg-converted.png"):
             #print
             print "Printing:", event.pathname
-            printer.printImage(Image.open(envent.pathname), True)
+            printer.printImage(Image.open(event.pathname), True)
 
         if event.pathname.endswith(".png") or event.pathname.endswith(".jpg") or event.pathname.endswith(".PNG") or event.pathname.endswith(".JPG"):
             #convert
